@@ -1,0 +1,11 @@
+ul {
+	width: 500px;
+}
+li {
+	border: 1px solid grey;
+	background: skyblue;
+	padding: 5px 10px;
+}
+.checked {
+	text-decoration: line-through;
+}
