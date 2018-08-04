@@ -1,42 +1,36 @@
-//		<li><input type="checkbox"/><span> Write this tutorial </span><button>Rename</button></li>
+const btnNew = document.getElementById('btnAdd');
+btnNew.addEventListener('click', addLi);
+
+function addLi() {
+	const input = document.getElementsByTagName('input');
+	const itemText = input.value;
+
+	if (itemText === '' || itemText === ' ') {
+		return;
+	}
+
+	const toDoList = document.getElementsByTagName('ul');
+
+	addNewItem(toDoList, itemText);
+}
+
 function updateItemStatus() {
-	const itemText =document.getElementById('item');
+	const itemText = document.getElementById('item');
 
-	if(this.checked) {
- 		itemText.style.text-decoration = "line-through";
- 	}
- 	else {
- 		 itemText.style.text-decoration = "none"
-
+	if (this.checked) {
+ 		itemText.style.textDecoration = "line-through";
+ 	} else {
+ 		itemText.style.textDecoration = "none";
  	}
 }
 
-
 function addNewItem(list, itemText) {
  	const listItem = document.createElement('li');
- 	const checkbox = document.createElement('input');
- 	checkbox.type = 'checkbox';
- 	checkbox.onclick = updateItemStatus;
-
- 	const span = document.createElement('span');
- 	span.innerText = itemText;
-
- 	listItem.appendChild(checkbox);
- 	listItem.appendChild(span);
-
- 	
-
-
  	list.appendChild(listItem);
- }
 
-const btnNew = document.getElementById('btnAdd');
-btnNew.onclick = () => {
-	const inItemText = document.getElementById('inItemText');
-	const itemText = inItemText.value;
-	if(!itemText || itemText == '' || itemText == ' '){
-		return false;
-	}
-	addNewItem(document.getElementById('toDoList'), itemText);
+ 	const checkbox = document.createElement('input');
+ 	listItem.appendChild(checkbox);
 
+ 	checkbox.type = 'checkbox';
+ 	checkbox.addEventListener('click', updateItemStatus);
 }
