@@ -2,35 +2,42 @@ const btnNew = document.getElementById('btnAdd');
 btnNew.addEventListener('click', addLi);
 
 function addLi() {
-	const input = document.getElementsByTagName('input');
+	const input = document.getElementsByTagName('input')[0];
 	const itemText = input.value;
 
-	if (itemText === '' || itemText === ' ') {
+	if (!checkIfInputIsValid(itemText)) {
 		return;
 	}
 
-	const toDoList = document.getElementsByTagName('ul');
+	const toDoList = document.getElementsByTagName('ul')[0];
 
 	addNewItem(toDoList, itemText);
 }
 
-function updateItemStatus() {
-	const itemText = document.getElementById('item');
-
-	if (this.checked) {
- 		itemText.style.textDecoration = "line-through";
- 	} else {
- 		itemText.style.textDecoration = "none";
- 	}
+function checkIfInputIsValid(itemText) {
+	if (itemText === '' || itemText === ' ') {
+		return false;
+	} else {
+		return true;
+	}
 }
 
+
 function addNewItem(list, itemText) {
- 	const listItem = document.createElement('li');
- 	list.appendChild(listItem);
+  	const listItem = document.createElement('li');
+	const checkbox = createCheckbox();
+	const span = document.createElement('span');
+ 	
+	span.innerText = itemText;
+	
+	listItem.appendChild(checkbox);
+	listItem.appendChild(span);
+	list.appendChild(listItem);
+}
 
- 	const checkbox = document.createElement('input');
- 	listItem.appendChild(checkbox);
-
+function createCheckbox() {
+	const checkbox = document.createElement('input');
  	checkbox.type = 'checkbox';
- 	checkbox.addEventListener('click', updateItemStatus);
+
+ 	return checkbox;
 }
